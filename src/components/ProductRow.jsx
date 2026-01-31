@@ -72,17 +72,19 @@ export default function ProductRow({
       {isEditing ? (
         <div className="flex items-center gap-3">
           <input
-            className="border p-2 rounded w-24"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            placeholder="Price"
-          />
-          <input
-            className="border p-2 rounded w-24"
-            value={stock}
-            onChange={(e) => setStock(e.target.value)}
-            placeholder="Stock"
-          />
+  className="border px-2 py-1.5 rounded w-16 text-sm"
+  value={price}
+  onChange={(e) => setPrice(e.target.value)}
+  placeholder="Price"
+/>
+
+<input
+  className="border px-2 py-1.5 rounded w-16 text-sm"
+  value={stock}
+  onChange={(e) => setStock(e.target.value)}
+  placeholder="Stock"
+/>
+
 
           {/* BIG NICE BUTTONS */}
           <button
