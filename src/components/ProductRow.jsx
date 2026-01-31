@@ -16,7 +16,11 @@ export default function ProductRow({ product, reload }) {
   };
 
   const remove = async () => {
-    if (!window.confirm("Delete this product?")) return;
+    const ok = window.confirm(
+      `Delete product "${product.name}"?`
+    );
+    if (!ok) return;
+
     await deleteProduct(product._id);
     reload();
   };
@@ -24,33 +28,37 @@ export default function ProductRow({ product, reload }) {
   return (
     <div
       {...swipe}
-      className="flex justify-between items-center border p-2 rounded"
+      className="flex justify-between items-center border p-3 rounded bg-white"
     >
       <span className="font-medium">{product.name}</span>
 
       {editing ? (
-        <div className="flex gap-1 items-center">
+        <div className="flex items-center gap-2">
           <input
-            className="border w-16 px-1"
+            className="border w-16 px-1 rounded"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
           <input
-            className="border w-16 px-1"
+            className="border w-16 px-1 rounded"
             value={stock}
             onChange={(e) => setStock(e.target.value)}
           />
-          <button onClick={save} className="text-green-600">✔</button>
+          <button onClick={save} className="text-green-600">
+            ✔
+          </button>
           <button
             onClick={remove}
             className="text-red-600 font-bold"
-            title="Delete"
+            title="Delete product"
           >
             ✕
           </button>
         </div>
       ) : (
-        <span>${product.price} | {product.stock}</span>
+        <span className="text-gray-700">
+          ${product.price} | {product.stock}
+        </span>
       )}
     </div>
   );
