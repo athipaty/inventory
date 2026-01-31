@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ProductRow from "./ProductRow";
 import PdfButton from "./PdfButton";
+import AddProduct from "./AddProduct";
 
 export default function SupplierItem({ supplier, products, reload }) {
   const [open, setOpen] = useState(false);
@@ -19,11 +20,19 @@ export default function SupplierItem({ supplier, products, reload }) {
       </div>
 
       {open && (
-        <div className="mt-2 space-y-2">
-          {products.map(p => (
-            <ProductRow key={p._id} product={p} reload={reload} />
-          ))}
-        </div>
+        <>
+          <AddProduct supplierId={supplier._id} reload={reload} />
+
+          <div className="mt-2 space-y-2">
+            {products.map((p) => (
+              <ProductRow
+                key={p._id}
+                product={p}
+                reload={reload}
+              />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
