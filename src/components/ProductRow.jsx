@@ -15,26 +15,39 @@ export default function ProductRow({ product, reload }) {
     reload();
   };
 
+  const remove = async () => {
+    if (!window.confirm("Delete this product?")) return;
+    await deleteProduct(product._id);
+    reload();
+  };
+
   return (
     <div
       {...swipe}
       className="flex justify-between items-center border p-2 rounded"
     >
-      <span>{product.name}</span>
+      <span className="font-medium">{product.name}</span>
 
       {editing ? (
-        <div className="flex gap-1">
+        <div className="flex gap-1 items-center">
           <input
             className="border w-16 px-1"
             value={price}
-            onChange={e => setPrice(e.target.value)}
+            onChange={(e) => setPrice(e.target.value)}
           />
           <input
             className="border w-16 px-1"
             value={stock}
-            onChange={e => setStock(e.target.value)}
+            onChange={(e) => setStock(e.target.value)}
           />
           <button onClick={save} className="text-green-600">✔</button>
+          <button
+            onClick={remove}
+            className="text-red-600 font-bold"
+            title="Delete"
+          >
+            ✕
+          </button>
         </div>
       ) : (
         <span>${product.price} | {product.stock}</span>
