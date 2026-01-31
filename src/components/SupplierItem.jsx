@@ -1,38 +1,49 @@
 import { useState } from "react";
+import AddProduct from "./AddProduct";
 import ProductRow from "./ProductRow";
 import PdfButton from "./PdfButton";
-import AddProduct from "./AddProduct";
 
 export default function SupplierItem({ supplier, products, reload }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border rounded-lg p-3 bg-white">
-      <div className="flex justify-between items-center">
-        <button
-          onClick={() => setOpen(!open)}
-          className="font-semibold text-lg"
-        >
+    <div className="border rounded-lg bg-white">
+      {/* HEADER */}
+      <div
+        className="flex justify-between items-center p-4 cursor-pointer"
+        onClick={() => setOpen(!open)}
+      >
+        <span className="text-lg font-semibold">
           {supplier.name}
-        </button>
+        </span>
 
         <PdfButton supplier={supplier} products={products} />
       </div>
 
+      {/* EXPAND AREA */}
       {open && (
-        <>
-          <AddProduct supplierId={supplier._id} reload={reload} />
+        <div className="border-t p-3 space-y-3 bg-gray-50">
+          {/* ADD PRODUCT */}
+          <AddProduct
+            supplierId={supplier._id}
+            reload={reload}
+          />
 
-          <div className="mt-2 space-y-2">
-            {products.map((p) => (
+          {/* PRODUCT LIST */}
+          {products.length === 0 ? (
+            <div className="text-gray-500 text-sm">
+              No products yet
+            </div>
+          ) : (
+            products.map((p) => (
               <ProductRow
                 key={p._id}
                 product={p}
                 reload={reload}
               />
-            ))}
-          </div>
-        </>
+            ))
+          )}
+        </div>
       )}
     </div>
   );
