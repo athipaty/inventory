@@ -9,16 +9,24 @@ export default function SupplierItem({ supplier, products, reload }) {
   return (
     <div className="border rounded-lg bg-white">
       {/* HEADER */}
-      <div
-        className="flex justify-between items-center p-4 cursor-pointer"
-        onClick={() => setOpen(!open)}
-      >
-        <span className="text-lg font-semibold">
-          {supplier.name}
-        </span>
+      <div className="flex justify-between items-center p-4">
+  <button
+    onClick={() => setOpen(!open)}
+    className="text-lg font-semibold flex-1 text-left"
+  >
+    {supplier.name}
+    <span className="ml-2 text-gray-400">
+      {open ? "▲" : "▼"}
+    </span>
+  </button>
 
-        <PdfButton supplier={supplier} products={products} />
-      </div>
+  <PdfButton
+    supplier={supplier}
+    products={products}
+    onClick={(e) => e.stopPropagation()}
+  />
+</div>
+
 
       {/* EXPAND AREA */}
       {open && (
