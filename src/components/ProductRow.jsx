@@ -92,7 +92,7 @@ export default function ProductRow({
         </div>
       ) : (
         <div className="flex justify-between items-center text-sm w-full">
-          <div className="text-sm text-gray-900 truncate max-w-[230px]" onClick={startEdit}>
+          <div className="text-sm text-gray-900 truncate max-w-[210px]" onClick={startEdit}>
             {product.name}
           </div>
           <div className="text-sm text-gray-600">Stock : {product.stock}</div>
