@@ -49,21 +49,21 @@ export default function AddProduct({ supplierId, reload }) {
 
       <div className="flex flex-col gap-1">
         <input
-          className="border px-2 py-1 rounded flex-1 text-center"
+          className="border px-2 py-1 rounded flex-1 text-center text-sm"
           placeholder="Product name (Must)"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
 
         <input
-          className="border px-2 py-1 rounded sm:w-24 text-center"
+          className="border px-2 py-1 rounded sm:w-24 text-center text-sm"
           placeholder="Price (Optional)"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
 
         <input
-          className="border px-2 py-1 rounded sm:w-24 text-center"
+          className="border px-2 py-1 rounded sm:w-24 text-center text-sm"
           placeholder="Stock (Optional)"
           value={stock}
           onChange={(e) => setStock(e.target.value)}
