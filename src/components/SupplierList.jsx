@@ -8,6 +8,7 @@ export default function SupplierList() {
   const [suppliers, setSuppliers] = useState([]);
   const [products, setProducts] = useState([]);
   const [openSupplierId, setOpenSupplierId] = useState(null);
+  const [editingSupplierId, setEditingSupplierId] = useState(null);
 
   // Load suppliers + products
   const load = async () => {
@@ -43,16 +44,18 @@ export default function SupplierList() {
           <SupplierItem
             key={supplier._id}
             supplier={supplier}
-            products={products.filter(
-              (p) => p.supplier?._id === supplier._id
-            )}
+            products={products.filter((p) => p.supplier?._id === supplier._id)}
             reload={load}
             isOpen={openSupplierId === supplier._id}
             onToggle={() =>
               setOpenSupplierId((prev) =>
-                prev === supplier._id ? null : supplier._id
+                prev === supplier._id ? null : supplier._id,
               )
             }
+            // ✅ NEW
+            isEditingSupplier={editingSupplierId === supplier._id}
+            startEditSupplier={() => setEditingSupplierId(supplier._id)}
+            stopEditSupplier={() => setEditingSupplierId(null)}
           />
         ))}
       </div>
