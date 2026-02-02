@@ -12,11 +12,9 @@ export default function App() {
         <h1 className="text-2xl font-bold">SGO Inventory</h1>
 
         {/* Toggle */}
-        <div className="flex items-center gap-2 text-sm">
-          <span
-            className={view === "supplier" ? "font-semibold" : "text-gray-400"}
-          >
-            Suppliers
+        <div className="flex items-center gap-3 text-sm">
+          <span className="font-medium">
+            {view === "supplier" ? "Suppliers" : "Products"}
           </span>
 
           <button
@@ -26,6 +24,7 @@ export default function App() {
             className={`w-10 h-5 rounded-full relative transition ${
               view === "product" ? "bg-blue-600" : "bg-gray-300"
             }`}
+            aria-label="Toggle view"
           >
             <span
               className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition ${
@@ -33,12 +32,6 @@ export default function App() {
               }`}
             />
           </button>
-
-          <span
-            className={view === "product" ? "font-semibold" : "text-gray-400"}
-          >
-            Products
-          </span>
         </div>
       </div>
 

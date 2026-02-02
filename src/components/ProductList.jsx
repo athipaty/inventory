@@ -13,9 +13,7 @@ export default function ProductList() {
   // Load + sort A-Z
   const loadProducts = async () => {
     const res = await axios.get(`${API}/products`);
-    const sorted = [...res.data].sort((a, b) =>
-      a.name.localeCompare(b.name)
-    );
+    const sorted = [...res.data].sort((a, b) => a.name.localeCompare(b.name));
     setProducts(sorted);
   };
 
@@ -50,38 +48,35 @@ export default function ProductList() {
   return (
     <div className="space-y-2">
       {products.map((p) => (
-        <div
-          key={p._id}
-          className="border rounded px-2 py-1 bg-white"
-        >
+        <div key={p._id} className="border rounded px-2 py-1 bg-white">
           {editingId === p._id ? (
             /* 🔧 EDIT MODE */
-            <div className="space-y-2">
+            <div className="space-y-1">
               <input
-                className="border p-2 rounded w-full"
+                className="border px-2 py-1 rounded w-full"
                 value={editName}
                 onChange={(e) => setEditName(e.target.value)}
               />
 
-              <input
-                type="number"
-                className="border p-2 rounded w-full"
-                value={editStock}
-                onChange={(e) => setEditStock(e.target.value)}
-              />
-
               <div className="flex gap-2 justify-end">
+                <input
+                  type="number"
+                  className="border px-2 py-1 text-center rounded w-full"
+                  value={editStock}
+                  onChange={(e) => setEditStock(e.target.value)}
+                />
+
                 <button
                   onClick={() => saveEdit(p._id)}
                   className="px-3 py-1 bg-green-600 text-white rounded"
                 >
-                  ✓ Save
+                  Save
                 </button>
                 <button
                   onClick={cancelEdit}
                   className="px-3 py-1 bg-gray-300 rounded"
                 >
-                  ✕ Cancel
+                  Cancel
                 </button>
               </div>
             </div>
@@ -90,9 +85,7 @@ export default function ProductList() {
             <>
               <div className="flex items-center justify-between">
                 <span className="text-sm truncate">{p.name}</span>
-                <span className="text-sm text-gray-600">
-                  Stock: {p.stock}
-                </span>
+                <span className="text-sm text-gray-600">Stock: {p.stock}</span>
               </div>
 
               <div className="flex items-center justify-between mt-1">
@@ -102,7 +95,7 @@ export default function ProductList() {
 
                 <button
                   onClick={() => startEdit(p)}
-                  className="text-blue-600 text-sm"
+                  className="text-blue-600 text-xs"
                 >
                   Edit
                 </button>
