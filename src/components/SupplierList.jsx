@@ -9,9 +9,14 @@ export default function SupplierList() {
   const [products, setProducts] = useState([]);
   const [openSupplierId, setOpenSupplierId] = useState(null);
 
+  // Load suppliers + products
   const load = async () => {
     const s = await getSuppliers();
     const p = await getProducts();
+
+    // optional: sort suppliers A–Z
+    s.sort((a, b) => a.name.localeCompare(b.name));
+
     setSuppliers(s);
     setProducts(p);
   };
@@ -22,24 +27,31 @@ export default function SupplierList() {
 
   return (
     <>
+      {/* ADD SUPPLIER */}
       <AddSupplier reload={load} />
 
+      {/* EMPTY STATE */}
       {suppliers.length === 0 && (
         <div className="text-gray-500 text-center mt-10">
           No suppliers yet. Add your first supplier 👆
         </div>
       )}
 
+      {/* SUPPLIER LIST */}
       <div className="space-y-2">
-        {suppliers.map((s) => (
+        {suppliers.map((supplier) => (
           <SupplierItem
-            key={s._id}
-            supplier={s}
-            products={products.filter((p) => p.supplier?._id === s._id)}
+            key={supplier._id}
+            supplier={supplier}
+            products={products.filter(
+              (p) => p.supplier?._id === supplier._id
+            )}
             reload={load}
-            isOpen={openSupplierId === s._id}
+            isOpen={openSupplierId === supplier._id}
             onToggle={() =>
-              setOpenSupplierId((prev) => (prev === s._id ? null : s._id))
+              setOpenSupplierId((prev) =>
+                prev === supplier._id ? null : supplier._id
+              )
             }
           />
         ))}

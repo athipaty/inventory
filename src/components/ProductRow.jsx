@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { updateProduct, deleteProduct } from "../api/productApi";
 import { useSwipe } from "../utils/swipe";
+import toTitleCase from "../utils/toTitleCase";
 
 export default function ProductRow({
   product,
@@ -55,6 +56,7 @@ export default function ProductRow({
             className="p-2 rounded font-medium text-sm inline-block w-full"
             value={name}
             onChange={(e) => setName(e.target.value)}
+              onBlur={() => setName(toTitleCase(name))}
             placeholder="Product name"
             />
           <div className="flex items-center gap-2">
