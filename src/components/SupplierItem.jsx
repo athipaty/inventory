@@ -22,7 +22,8 @@ export default function SupplierItem({ supplier, products, reload }) {
           </span>
         </button>
 
-        <div className="flex items-center gap-4">
+        {open ? (
+          <div className="flex items-center gap-4">
           <PdfButton supplier={supplier} products={products} />
           <button
             onClick={async () => {
@@ -39,6 +40,11 @@ export default function SupplierItem({ supplier, products, reload }) {
             🗑️
           </button>
         </div>
+        ) : (
+          <div></div>
+        )}
+
+        
       </div>
 
       {/* BODY */}
