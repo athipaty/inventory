@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createSupplier } from "../api/supplierApi";
+import toTitleCase from "../utils/toTitleCase";
 
 export default function AddSupplier({ reload }) {
   const [name, setName] = useState("");
@@ -28,7 +29,9 @@ export default function AddSupplier({ reload }) {
   };
 
   return (
-    <div className={`border rounded-lg px-3 py-2 mb-2  ${showAdd ? "bg-gray-200" : ""}`}>
+    <div
+      className={`border rounded-lg px-3 py-2 mb-2  ${showAdd ? "bg-gray-200" : ""}`}
+    >
       {/* Toggle button */}
       <button
         onClick={() => setShowAdd((prev) => !prev)}
@@ -46,6 +49,7 @@ export default function AddSupplier({ reload }) {
               placeholder="Supplier name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              onBlur={() => setName(toTitleCase(name))}
             />
           </div>
 

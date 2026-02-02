@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createProduct } from "../api/productApi";
+import toTitleCase from "../utils/toTitleCase";
 
 export default function AddProduct({ supplierId, reload }) {
   const [name, setName] = useState("");
@@ -36,7 +37,9 @@ export default function AddProduct({ supplierId, reload }) {
   };
 
   return (
-    <div className={`flex flex-col sm:flex-row p-2 rounded gap-1 border ${showAdd ? "bg-gray-200" : ""}`}>
+    <div
+      className={`flex flex-col sm:flex-row p-2 rounded gap-1 border ${showAdd ? "bg-gray-200" : ""}`}
+    >
       {/* Toggle button */}
       <button
         onClick={() => setShowAdd((prev) => !prev)}
@@ -46,37 +49,37 @@ export default function AddProduct({ supplierId, reload }) {
       </button>
 
       {showAdd && (
+        <div className="flex flex-col gap-1">
+          <input
+            className="border px-2 py-1 rounded flex-1 text-center text-sm"
+            placeholder="Product name (Must)"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onBlur={() => setName(toTitleCase(name))}
+          />
 
-      <div className="flex flex-col gap-1">
-        <input
-          className="border px-2 py-1 rounded flex-1 text-center text-sm"
-          placeholder="Product name (Must)"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+          <input
+            className="border px-2 py-1 rounded sm:w-24 text-center text-sm"
+            placeholder="Price (Optional)"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
 
-        <input
-          className="border px-2 py-1 rounded sm:w-24 text-center text-sm"
-          placeholder="Price (Optional)"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
+          <input
+            className="border px-2 py-1 rounded sm:w-24 text-center text-sm"
+            placeholder="Stock (Optional)"
+            value={stock}
+            onChange={(e) => setStock(e.target.value)}
+          />
 
-        <input
-          className="border px-2 py-1 rounded sm:w-24 text-center text-sm"
-          placeholder="Stock (Optional)"
-          value={stock}
-          onChange={(e) => setStock(e.target.value)}
-        />
-
-        <button
-          disabled={loading || !name.trim()}
-          onClick={submit}
-          className="bg-green-600 text-white px-4 py-2 rounded disabled:opacity-50"
-        >
-          Add
-        </button>
-      </div>
+          <button
+            disabled={loading || !name.trim()}
+            onClick={submit}
+            className="bg-green-600 text-white px-4 py-2 rounded disabled:opacity-50"
+          >
+            Add
+          </button>
+        </div>
       )}
     </div>
   );
