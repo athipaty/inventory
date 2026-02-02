@@ -29,7 +29,7 @@ export default function SupplierList() {
         </div>
       )}
 
-      <div className="space-y-3">
+      <div className="space-y-2">
         {suppliers.map((s) => (
           <SupplierItem
             key={s._id}

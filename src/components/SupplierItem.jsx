@@ -9,20 +9,20 @@ export default function SupplierItem({ supplier, products, reload }) {
   const [editingProductId, setEditingProductId] = useState(null);
 
   return (
-    <div className="border rounded-lg bg-white">
+    <div className={`border rounded-lg bg-white ${open ? "bg-gray-200" : ""}`}>
       {/* HEADER */}
-      <div className="flex justify-between items-center p-4">
+      <div className="flex justify-between items-center px-2 py-1">
         <button
           onClick={() => setOpen(!open)}
-          className="text-lg font-semibold flex-1 text-left"
+          className="text-sm font-semibold flex flex-1 text-left"
         >
-          {supplier.name}
-          <span className="ml-2 text-gray-400">
-            {open ? "▲" : "▼"}
+          
+          <span className="ml-1 text-gray-500 max-w-[200px] inline-block truncate">
+            {open ? `▲ ${supplier.name}` : `▼ ${supplier.name}`}
           </span>
         </button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <PdfButton supplier={supplier} products={products} />
           <button
             onClick={async () => {

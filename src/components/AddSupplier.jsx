@@ -5,6 +5,7 @@ export default function AddSupplier({ reload }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
 
   const submit = async () => {
     if (!name.trim()) {
@@ -27,32 +28,36 @@ export default function AddSupplier({ reload }) {
   };
 
   return (
-    <div className="border rounded-lg p-3 mb-4 bg-gray-50">
-      <h2 className="font-semibold mb-2">➕ Add Supplier</h2>
-
-      <div className="flex flex-col sm:flex-row gap-2">
-        <input
-          className="border p-2 rounded w-full"
-          placeholder="Supplier name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <input
-          className="border p-2 rounded w-full sm:w-40"
-          placeholder="Phone (optional)"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-      </div>
-
+    <div className={`border rounded-lg px-3 py-2 mb-2  ${showAdd ? "bg-gray-200" : ""}`}>
+      {/* Toggle button */}
       <button
-        disabled={loading}
-        onClick={submit}
-        className="mt-2 bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50"
+        onClick={() => setShowAdd((prev) => !prev)}
+        className="text-sm text-blue-600 w-full text-start"
       >
-        {loading ? "Adding..." : "Add Supplier"}
+        {showAdd ? "▲ Add Supplier" : "▼ Add Supplier"}
       </button>
+
+      {/* Add Supplier Form */}
+      {showAdd && (
+        <>
+          <div className="flex flex-col sm:flex-row gap-2 mt-2">
+            <input
+              className="border p-2 rounded w-full text-center"
+              placeholder="Supplier name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+
+          <button
+            disabled={loading || !name.trim()}
+            onClick={submit}
+            className="mt-2 bg-blue-600 text-white px-4 py-2 w-full rounded disabled:opacity-50"
+          >
+            {loading ? "Adding..." : "Add Supplier"}
+          </button>
+        </>
+      )}
     </div>
   );
 }
