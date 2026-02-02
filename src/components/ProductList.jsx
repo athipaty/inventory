@@ -53,7 +53,7 @@ export default function ProductList() {
             /* 🔧 EDIT MODE */
             <div className="space-y-1">
               <input
-                className="border px-2 py-1 rounded w-full"
+                className="border px-2 py-1 rounded w-full text-sm"
                 value={editName}
                 onChange={(e) => setEditName(e.target.value)}
               />
@@ -61,20 +61,20 @@ export default function ProductList() {
               <div className="flex gap-2 justify-end">
                 <input
                   type="number"
-                  className="border px-2 py-1 text-center rounded w-full"
+                  className="border px-2 py-1 text-center rounded text-sm w-full"
                   value={editStock}
                   onChange={(e) => setEditStock(e.target.value)}
                 />
 
                 <button
                   onClick={() => saveEdit(p._id)}
-                  className="px-3 py-1 bg-green-600 text-white rounded"
+                  className="px-3 py-1 bg-green-600 text-white text-sm rounded"
                 >
                   Save
                 </button>
                 <button
                   onClick={cancelEdit}
-                  className="px-3 py-1 bg-gray-300 rounded"
+                  className="px-3 py-1 bg-gray-300 rounded text-sm"
                 >
                   Cancel
                 </button>
