@@ -7,6 +7,7 @@ import AddSupplier from "./AddSupplier";
 export default function SupplierList() {
   const [suppliers, setSuppliers] = useState([]);
   const [products, setProducts] = useState([]);
+  const [openSupplierId, setOpenSupplierId] = useState(null);
 
   const load = async () => {
     const s = await getSuppliers();
@@ -34,10 +35,12 @@ export default function SupplierList() {
           <SupplierItem
             key={s._id}
             supplier={s}
-            products={products.filter(
-              (p) => p.supplier?._id === s._id
-            )}
+            products={products.filter((p) => p.supplier?._id === s._id)}
             reload={load}
+            isOpen={openSupplierId === s._id}
+            onToggle={() =>
+              setOpenSupplierId((prev) => (prev === s._id ? null : s._id))
+            }
           />
         ))}
       </div>
