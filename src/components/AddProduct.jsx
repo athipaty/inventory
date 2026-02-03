@@ -7,7 +7,6 @@ export default function AddProduct({ supplierId, reload }) {
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showAdd, setShowAdd] = useState(false);
 
   const submit = async () => {
     if (!name.trim()) {
@@ -38,17 +37,8 @@ export default function AddProduct({ supplierId, reload }) {
 
   return (
     <div
-      className={`flex flex-col sm:flex-row p-2 rounded gap-1 border ${showAdd ? "bg-gray-200" : ""}`}
+      className={`flex flex-col sm:flex-row p-2 rounded gap-1`}
     >
-      {/* Toggle button */}
-      <button
-        onClick={() => setShowAdd((prev) => !prev)}
-        className="text-sm text-blue-600 w-full text-start"
-      >
-        {showAdd ? "▲ Add Product" : "▼ Add Product"}
-      </button>
-
-      {showAdd && (
         <div className="flex flex-col gap-1">
           <input
             className="border px-2 py-1 rounded flex-1 text-center text-sm"
@@ -80,7 +70,6 @@ export default function AddProduct({ supplierId, reload }) {
             Add
           </button>
         </div>
-      )}
     </div>
   );
 }

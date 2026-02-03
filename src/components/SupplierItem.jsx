@@ -19,6 +19,7 @@ export default function SupplierItem({
 }) {
   const [editingProductId, setEditingProductId] = useState(null);
   const [supplierName, setSupplierName] = useState(supplier.name);
+  const [showAddProduct, setShowAddProduct] = useState(false);
 
   // swipe tracking
   const [touchStartX, setTouchStartX] = useState(null);
@@ -60,7 +61,7 @@ export default function SupplierItem({
     >
       {/* HEADER */}
       <div
-        className="flex justify-between items-center px-2 py-1 touch-pan-y"
+        className="flex justify-between items-center px-2 py-1"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -78,7 +79,7 @@ export default function SupplierItem({
               autoFocus
             />
           ) : (
-            <span className="ml-1 text-gray-500 max-w-[200px] inline-block truncate">
+            <span className="text-gray-500 max-w-[200px] inline-block truncate">
               {isOpen ? `▲ ${supplier.name}` : `▼ ${supplier.name}`}
             </span>
           )}
@@ -106,21 +107,16 @@ export default function SupplierItem({
             </button>
           </div>
         ) : isOpen ? (
-          <div className="flex items-center gap-4">
-            <PdfButton supplier={supplier} products={products} />
+          <div className="flex items-center gap-3">
+            {/* <PdfButton supplier={supplier} products={products} /> */}
+
+            {/* ➕ Add Product */}
             <button
-              onClick={async () => {
-                const ok = window.confirm(
-                  `Delete supplier "${supplier.name}" and ALL its products?`,
-                );
-                if (!ok) return;
-                await deleteSupplier(supplier._id);
-                reload();
-              }}
-              className="text-red-600 text-xl"
-              title="Delete supplier"
+              onClick={() => setShowAddProduct(true)}
+              className="font-bold text-3xl text-green-600 m-0"
+              title="Add product"
             >
-              🗑️
+              +
             </button>
           </div>
         ) : (
@@ -131,8 +127,6 @@ export default function SupplierItem({
       {/* BODY */}
       {isOpen && (
         <div className="border-t p-2 space-y-1 bg-gray-50">
-          <AddProduct supplierId={supplier._id} reload={reload} />
-
           {products.length === 0 ? (
             <div className="text-gray-500 text-sm">No products yet</div>
           ) : (
@@ -147,6 +141,42 @@ export default function SupplierItem({
               />
             ))
           )}
+          <button
+            onClick={async () => {
+              const ok = window.confirm(
+                `Delete supplier "${supplier.name}" and ALL its products?`,
+              );
+              if (!ok) return;
+              await deleteSupplier(supplier._id);
+              reload();
+            }}
+            className="text-red-600 text-xs text-end w-full px-2 pt-2"
+            title="Delete supplier"
+          >
+            Delete this supplier
+          </button>
+        </div>
+      )}
+      {showAddProduct && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg w-80 p-4">
+            <h3 className="text-lg font-semibold mb-2">Add Product</h3>
+
+            <AddProduct
+              supplierId={supplier._id}
+              reload={async () => {
+                await reload();
+                setShowAddProduct(false);
+              }}
+            />
+
+            <button
+              onClick={() => setShowAddProduct(false)}
+              className="text-sm text-gray-500 mt-3 w-full"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       )}
     </div>
