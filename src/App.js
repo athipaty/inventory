@@ -23,7 +23,7 @@ export default function App() {
           {/* Hamburger */}
           <button
             onClick={() => setMenuOpen(true)}
-            className="text-2xl leading-none px-2"
+            className="text-3xl leading-none px-2"
             aria-label="Menu"
           >
             ☰
