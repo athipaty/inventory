@@ -28,9 +28,6 @@ export default function SupplierList() {
 
   return (
     <>
-      {/* ADD SUPPLIER */}
-      <AddSupplier reload={load} />
-
       {/* EMPTY STATE */}
       {suppliers.length === 0 && (
         <div className="text-gray-500 text-center mt-10">

@@ -47,7 +47,7 @@ export default function ProductRow({
   return (
     <div
       {...swipe}
-      className="border flex items-center justify-between gap-2 rounded p-3 bg-white"
+      className="border flex items-center justify-between gap-2 rounded px-2 py-1 bg-white"
     >
       {/* NAME */}
       {isEditing ? (

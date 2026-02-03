@@ -1,42 +1,83 @@
 import { useState } from "react";
 import SupplierList from "./components/SupplierList";
 import ProductList from "./components/ProductList";
+import AddSupplier from "./components/AddSupplier";
 
 export default function App() {
-  const [view, setView] = useState("supplier"); // supplier | product
+  const [view, setView] = useState("product");
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const selectView = (v) => {
+    setView(v);
+    setMenuOpen(false);
+  };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="max-w-4xl mx-auto p-4 relative">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold">SGO Inventory</h1>
 
-        {/* Toggle */}
-        <div className="flex items-center gap-3 text-sm">
-          <span className="font-medium">
-            {view === "supplier" ? "Suppliers" : "Products"}
-          </span>
-
+        {/* Right controls */}
+        <div className="flex items-center gap-3">
+          {/* Hamburger */}
           <button
-            onClick={() =>
-              setView(view === "supplier" ? "product" : "supplier")
-            }
-            className={`w-10 h-5 rounded-full relative transition ${
-              view === "product" ? "bg-blue-600" : "bg-gray-300"
-            }`}
-            aria-label="Toggle view"
+            onClick={() => setMenuOpen(true)}
+            className="text-2xl leading-none px-2"
+            aria-label="Menu"
           >
-            <span
-              className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition ${
-                view === "product" ? "left-5" : "left-0.5"
-              }`}
-            />
+            ☰
           </button>
         </div>
       </div>
 
-      {/* Content */}
-      {view === "supplier" ? <SupplierList /> : <ProductList />}
+      {/* CONTENT */}
+      {view === "supplier" && <SupplierList />}
+      {view === "product" && <ProductList />}
+      {view === "addSupplier" && (
+        <div className="max-w-md mx-auto">
+          <AddSupplier reload={() => setView("supplier")} />
+        </div>
+      )}
+
+      {/* MODAL */}
+      {menuOpen && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg w-72 p-4 space-y-3">
+
+            {/* Supplier View */}
+            <button
+              onClick={() => selectView("supplier")}
+              className="w-full border rounded-lg p-2 text-center hover:bg-gray-50"
+            >
+              <div className="font-medium">🏬Supplier View</div>
+            </button>
+
+            {/* Product View */}
+            <button
+              onClick={() => selectView("product")}
+              className="w-full border rounded-lg p-2 text-center hover:bg-gray-50"
+            >
+              <div className="font-medium">📦Product View</div>
+            </button>
+
+            {/* Add Supplier */}
+            <button
+              onClick={() => selectView("addSupplier")}
+              className="w-full border rounded-lg p-2 text-center hover:bg-gray-50"
+            >
+              <div className="font-medium">➕Add Supplier</div>
+            </button>
+
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="w-full text-sm text-gray-500"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

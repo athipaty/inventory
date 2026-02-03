@@ -130,7 +130,7 @@ export default function SupplierItem({
 
       {/* BODY */}
       {isOpen && (
-        <div className="border-t p-3 space-y-3 bg-gray-50">
+        <div className="border-t p-2 space-y-1 bg-gray-50">
           <AddProduct supplierId={supplier._id} reload={reload} />
 
           {products.length === 0 ? (

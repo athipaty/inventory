@@ -6,7 +6,7 @@ export default function AddSupplier({ reload }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showAdd, setShowAdd] = useState(false);
+  const [showAdd, setShowAdd] = useState(true);
 
   const submit = async () => {
     if (!name.trim()) {
