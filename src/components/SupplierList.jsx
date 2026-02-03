@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { getSuppliers } from "../api/supplierApi";
 import { getProducts } from "../api/productApi";
 import SupplierItem from "./SupplierItem";
-import AddSupplier from "./AddSupplier";
 
 export default function SupplierList() {
   const [suppliers, setSuppliers] = useState([]);
