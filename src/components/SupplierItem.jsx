@@ -57,18 +57,18 @@ export default function SupplierItem({
 
   return (
     <div
-      className={`border rounded-lg bg-white ${isOpen ? "bg-gray-200" : ""}`}
+      className={`border rounded-lg bg-white ${isOpen ? "bg-blue-300" : ""}`}
     >
       {/* HEADER */}
       <div
-        className="flex justify-between items-center px-2 py-1"
+        className="flex justify-between items-center pl-2 py-1"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
         <button
           onClick={onToggle}
           disabled={isEditingSupplier}
-          className="text-sm font-semibold flex flex-1 text-left"
+          className="text-sm flex flex-1 text-left"
         >
           {isEditingSupplier ? (
             <input
@@ -79,7 +79,7 @@ export default function SupplierItem({
               autoFocus
             />
           ) : (
-            <span className="text-gray-500 max-w-[200px] inline-block truncate">
+            <span className="text-gray-500 max-w-[230px] inline-block truncate">
               {isOpen ? `▲ ${supplier.name}` : `▼ ${supplier.name}`}
             </span>
           )}
@@ -100,7 +100,7 @@ export default function SupplierItem({
                 stopEditSupplier();
                 setSupplierName(supplier.name);
               }}
-              className="text-gray-500 text-lg"
+              className="text-gray-500 text-lg mr-2 front"
               title="Cancel"
             >
               ✕
@@ -126,7 +126,7 @@ export default function SupplierItem({
 
       {/* BODY */}
       {isOpen && (
-        <div className="border-t p-2 space-y-1 bg-gray-50">
+        <div className="p-2 space-y-1 bg-gray-50">
           {products.length === 0 ? (
             <div className="text-gray-500 text-sm">No products yet</div>
           ) : (
