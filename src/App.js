@@ -82,7 +82,7 @@ export default function App() {
               }}
               className="w-full border rounded-lg p-3 text-left hover:bg-gray-50"
             >
-              <div className="font-medium">📄Download All Products</div>
+              <div className="font-medium">📄Download</div>
             </button>
 
             <button
