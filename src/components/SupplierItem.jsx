@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import AddProduct from "./AddProduct";
 import ProductRow from "./ProductRow";
-import PdfButton from "./PdfButton";
+// import PdfButton from "./PdfButton";
 import { deleteSupplier, updateSupplier } from "../api/supplierApi";
 import toTitleCase from "../utils/toTitleCase";
 
