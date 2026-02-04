@@ -151,7 +151,7 @@ export default function ProductList() {
                 <span className="text-[10px] text-gray-500 truncate">
                   {p.supplier?.name || "No supplier"}
                 </span>
-                <span className="text-[10px]">{`$ ${p.price}`e}</span>
+                <span className="text-[10px]">{`$ ${p.price}`}</span>
               </div>
             </div>
           )}
