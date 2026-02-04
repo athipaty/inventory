@@ -114,7 +114,7 @@ export default function ProductList() {
                   type="number"
                   className="border px-2 py-1 text-center rounded text-sm w-full"
                   value={editPrice}
-                  onChange={(e) => serEditPrice(e.target.value)}
+                  onChange={(e) => setEditPrice(e.target.value)}
                 />
 
                 <button
