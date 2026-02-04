@@ -142,37 +142,36 @@ export default function SupplierItem({
             ))
           )}
           <button
-  onClick={async () => {
-    if (products.length > 0) {
-      alert(
-        `Cannot delete "${supplier.name}".\n\nPlease delete all products under this supplier first.`
-      );
-      return;
-    }
+            onClick={async () => {
+              if (products.length > 0) {
+                alert(
+                  `Cannot delete "${supplier.name}".\n\nPlease delete all products under this supplier first.`,
+                );
+                return;
+              }
 
-    const ok = window.confirm(
-      `Are you sure you want to delete supplier "${supplier.name}"?`
-    );
-    if (!ok) return;
+              const ok = window.confirm(
+                `Are you sure you want to delete supplier "${supplier.name}"?`,
+              );
+              if (!ok) return;
 
-    await deleteSupplier(supplier._id);
-    reload();
-  }}
-  className={`text-xs text-end w-full px-2 pt-2 ${
-    products.length > 0
-      ? "text-gray-400 cursor-not-allowed"
-      : "text-red-600"
-  }`}
-  disabled={products.length > 0}
-  title={
-    products.length > 0
-      ? "Delete all products first"
-      : "Delete supplier"
-  }
->
-  Delete this supplier
-</button>
-
+              await deleteSupplier(supplier._id);
+              reload();
+            }}
+            className={`text-xs text-end w-full px-2 pt-2 ${
+              products.length > 0
+                ? "text-gray-400 cursor-not-allowed"
+                : "text-red-600"
+            }`}
+            disabled={products.length > 0}
+            title={
+              products.length > 0
+                ? "Delete all products first"
+                : "Delete supplier"
+            }
+          >
+            Delete this supplier.
+          </button>
         </div>
       )}
       {showAddProduct && (
