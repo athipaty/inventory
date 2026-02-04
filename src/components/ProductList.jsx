@@ -10,6 +10,7 @@ export default function ProductList() {
   const [editName, setEditName] = useState("");
   const [editStock, setEditStock] = useState("");
   const [editUnit, setEditUnit] = useState("");
+  const [editPrice, setEditPrice] = useState("");
 
   // swipe tracking
   const [touchStartX, setTouchStartX] = useState(null);
@@ -33,6 +34,7 @@ export default function ProductList() {
     setEditName(p.name);
     setEditStock(p.stock);
     setEditUnit(p.unit);
+    setEditPrice(p.price);
   };
 
   // Cancel editing
@@ -40,7 +42,8 @@ export default function ProductList() {
     setEditingId(null);
     setEditName("");
     setEditStock("");
-    setEditUnit("")
+    setEditUnit("");
+    setEditPrice("");
   };
 
   // Save edit
@@ -49,6 +52,7 @@ export default function ProductList() {
       name: editName,
       stock: Number(editStock),
       unit: editUnit,
+      price: editPrice,
     });
     cancelEdit();
     loadProducts();
@@ -106,6 +110,13 @@ export default function ProductList() {
                   onChange={(e) => setEditUnit(e.target.value)}
                 />
 
+                <input
+                  type="number"
+                  className="border px-2 py-1 text-center rounded text-sm w-full"
+                  value={editPrice}
+                  onChange={(e) => serEditPrice(e.target.value)}
+                />
+
                 <button
                   onClick={() => saveEdit(p._id)}
                   className="px-3 py-1 bg-green-600 text-white text-sm rounded"
@@ -125,16 +136,22 @@ export default function ProductList() {
             <div className="flex flex-col border px-2 py-1 rounded">
               <div className="flex items-center justify-between">
                 <span className="text-sm truncate">{p.name}</span>
-                <span className="text-sm text-gray-600">
+                <div>
+                  <span className="text-sm text-gray-600">
                   {p.stock}
                 </span>
+                  <span className="text-sm text-gray-600">
+                  {p.unit}
+                  </span>
+                </div>
+                
               </div>
 
               <div className="flex justify-between">
                 <span className="text-[10px] text-gray-500 truncate">
                   {p.supplier?.name || "No supplier"}
                 </span>
-                <span className="text-[10px]">{p.unit}</span>
+                <span className="text-[10px]">{`$ ${p.price}`e}</span>
               </div>
             </div>
           )}
