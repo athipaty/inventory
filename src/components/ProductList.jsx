@@ -140,7 +140,7 @@ export default function ProductList() {
                   <span className="text-sm text-gray-600">
                   {p.stock}
                 </span>
-                  <span className="text-sm text-gray-600 ml-2">
+                  <span className="text-sm text-gray-600 ml-1">
                   {p.unit}
                   </span>
                 </div>
